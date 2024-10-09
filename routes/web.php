@@ -3,15 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
 
-Route::get('/', function () {
-    return false;
-});
+// установка CSRF остается за вами
+Route::get('/api/items', [TodoController::class, 'index']);
+Route::get('/api/items/{id}', [TodoController::class, 'show']);
+Route::get('/api/items/status/{status}', [TodoController::class, 'byStatus']);
 
+Route::post('/api/items', [TodoController::class, 'store']);
+Route::put('/api/items/{id}', [TodoController::class, 'update']);
 
-
-Route::get('/items', [TodoController::class, 'index']);
-Route::get('/items/{id}', [TodoController::class, 'show']);
-Route::post('/items', [TodoController::class, 'store']);
-Route::put('/items/{id}', [TodoController::class, 'update']);
-Route::delete('/items/{id}', [TodoController::class, 'destroy']);
+Route::delete('/api/items/{id}', [TodoController::class, 'destroy']);
 
